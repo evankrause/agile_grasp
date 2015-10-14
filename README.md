@@ -1,4 +1,7 @@
+
 # agile_grasp
+
+#agile_grasp modifications to become a cpp file for PR2
 
 * **Author:** Andreas ten Pas (atp@ccs.neu.edu)
 * **Version:** 1.0.0
