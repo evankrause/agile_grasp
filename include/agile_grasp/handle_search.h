@@ -38,7 +38,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/visualization/pcl_visualizer.h>
 
-#include <ros/ros.h>
+//#include <ros/ros.h>
 
 #include <agile_grasp/grasp_hypothesis.h>
 #include <agile_grasp/handle.h>

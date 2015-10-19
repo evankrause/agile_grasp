@@ -34,9 +34,9 @@
 
 #include <pcl/visualization/pcl_visualizer.h>
 
-#include <geometry_msgs/Point.h>
-#include <ros/ros.h>
-#include <visualization_msgs/MarkerArray.h>
+//#include <geometry_msgs/Point.h>
+//#include <ros/ros.h>
+//#include <visualization_msgs/MarkerArray.h>
 
 #include <agile_grasp/grasp_hypothesis.h>
 #include <agile_grasp/handle.h>
@@ -104,22 +104,22 @@ class Plot
 		 * \param node the ROS node for which the publishers are advertised
 		 * \param marker_lifetime the lifetime of each visual marker
 		*/
-		void createVisualPublishers(ros::NodeHandle& node, double marker_lifetime);
+//		void createVisualPublishers(ros::NodeHandle& node, double marker_lifetime);
 		
 		/** 
 		 * \brief Plot the grasp hypotheseses in Rviz.
 		 * \param hand_list the list of grasp hypotheses
 		 * \param frame the frame that the poses of the grasp hypotheses are relative to
 		*/
-		void plotGraspsRviz(const std::vector<GraspHypothesis>& hand_list, const std::string& frame, 
-			bool is_antipodal = false);
+//		void plotGraspsRviz(const std::vector<GraspHypothesis>& hand_list, const std::string& frame, 
+//			bool is_antipodal = false);
 		
 		/** 
 		 * \brief Plot the handles in Rviz.
 		 * \param handle_list the list of handles
 		 * \param frame the frame that the poses of the handle grasps are relative to
 		*/
-		void plotHandlesRviz(const std::vector<Handle>& handle_list, const std::string& frame);
+//		void plotHandlesRviz(const std::vector<Handle>& handle_list, const std::string& frame);
 		
 		/** 
 		 * \brief Plot the handles.
@@ -191,19 +191,20 @@ class Plot
 		 * \param alpha the transparency level of the marker
 		 * \param diam the diameter of the marker
 		*/
-		visualization_msgs::Marker createApproachMarker(const std::string& frame, const geometry_msgs::Point& center, 
-			const Eigen::Vector3d& approach, int id, const double* color, double alpha, double diam);
+//		visualization_msgs::Marker createApproachMarker(const std::string& frame, const geometry_msgs::Point& center, 
+//			const Eigen::Vector3d& approach, int id, const double* color, double alpha, double diam);
 		
 		/**
 		 * Create a visual marker.
 		 * \param frame the frame that the marker's pose is relative to
 		*/
-		visualization_msgs::Marker createMarker(const std::string& frame);
+//		visualization_msgs::Marker createMarker(const std::string& frame);
 		
-		ros::Publisher hypotheses_pub_; ///< ROS publisher for grasp hypotheses (Rviz)
-		ros::Publisher antipodal_pub_; ///< ROS publisher for antipodal grasps (Rviz)
-		ros::Publisher handles_pub_; ///< ROS publisher for handles (Rviz)
-		double marker_lifetime_; ///< max time that markers are visualized in Rviz
+//		ros::Publisher hypotheses_pub_; ///< ROS publisher for grasp hypotheses (Rviz)
+//		ros::Publisher antipodal_pub_; ///< ROS publisher for antipodal grasps (Rviz)
+//		ros::Publisher handles_pub_; ///< ROS publisher for handles (Rviz)
+//		double marker_lifetime_; ///< max time that markers are visualized in Rviz
+    
 };
 
 #endif /* PLOT_H */ 

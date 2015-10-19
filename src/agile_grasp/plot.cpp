@@ -198,7 +198,7 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> Plot::createViewer(std::str
   return viewer;
 }
 
-
+/*
 void Plot::createVisualPublishers(ros::NodeHandle& node, double marker_lifetime)
 {
   hypotheses_pub_ = node.advertise<visualization_msgs::MarkerArray>("grasp_hypotheses_visual", 10);
@@ -206,7 +206,9 @@ void Plot::createVisualPublishers(ros::NodeHandle& node, double marker_lifetime)
   handles_pub_ = node.advertise<visualization_msgs::MarkerArray>("handles_visual", 10);
   marker_lifetime_ = marker_lifetime;
 }
+*/
 
+/*
 void Plot::plotGraspsRviz(const std::vector<GraspHypothesis>& hand_list, const std::string& frame, bool is_antipodal)
 {  
   double red[3] = {1, 0, 0};
@@ -246,8 +248,9 @@ void Plot::plotGraspsRviz(const std::vector<GraspHypothesis>& hand_list, const s
   
   ros::Duration(1.0).sleep();
 }
+*/
 
-
+/*
 void Plot::plotHandlesRviz(const std::vector<Handle>& handle_list, const std::string& frame)
 {
 	std::cout << "Visualizing handles in Rviz ...\n";
@@ -270,7 +273,7 @@ void Plot::plotHandlesRviz(const std::vector<Handle>& handle_list, const std::st
   handles_pub_.publish(marker_array);
   ros::Duration(1.0).sleep();
 }
-
+*/
 
 void Plot::plotHandles(const std::vector<Handle>& handle_list, const PointCloud::Ptr& cloud, std::string str)
 {
@@ -368,7 +371,7 @@ void Plot::plotHandles(const std::vector<Handle>& handle_list, const PointCloud:
   viewer->close();
 }
 
-
+/*
 visualization_msgs::Marker Plot::createApproachMarker(const std::string& frame, const geometry_msgs::Point& center, 
 	const Eigen::Vector3d& approach, int id, const double* color, double alpha, double diam)
 {
@@ -393,8 +396,10 @@ visualization_msgs::Marker Plot::createApproachMarker(const std::string& frame, 
   marker.points.push_back(q);
   return marker;
 }
+*/
 
 
+/*
 visualization_msgs::Marker Plot::createMarker(const std::string& frame)
 {
   visualization_msgs::Marker marker;
@@ -404,3 +409,4 @@ visualization_msgs::Marker Plot::createMarker(const std::string& frame)
   marker.action = visualization_msgs::Marker::ADD;
   return marker;
 }
+*/

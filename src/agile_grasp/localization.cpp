@@ -124,14 +124,15 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 	std::cout << "Hand localization done in " << t2 - t0 << " sec\n";
 
 	if (plotting_mode_ == PCL_PLOTTING)
-	{
+	//{
 		plot_.plotHands(hand_list, cloud_plot, "");
-	}
+	//}
+  /*
 	else if (plotting_mode_ == RVIZ_PLOTTING)
 	{
 		plot_.plotGraspsRviz(hand_list, visuals_frame_);
 	}
-
+  */
 	return hand_list;
 }
 
@@ -149,8 +150,8 @@ std::vector<GraspHypothesis> Localization::predictAntipodalHands(const std::vect
 	std::cout << antipodal_hands.size() << " antipodal hand configurations found\n"; 
   if (plotting_mode_ == PCL_PLOTTING)
 		plot_.plotHands(hand_list, antipodal_hands, cloud_, "Antipodal Hands");
-	else if (plotting_mode_ == RVIZ_PLOTTING)
-		plot_.plotGraspsRviz(antipodal_hands, visuals_frame_, true);
+	//else if (plotting_mode_ == RVIZ_PLOTTING)
+	//	plot_.plotGraspsRviz(antipodal_hands, visuals_frame_, true);
 	return antipodal_hands;
 }
 
@@ -382,7 +383,7 @@ std::vector<Handle> Localization::findHandles(const std::vector<GraspHypothesis>
 	std::vector<Handle> handles = handle_search.findHandles(hand_list, min_inliers, min_length);
 	if (plotting_mode_ == PCL_PLOTTING)
 		plot_.plotHandles(handles, cloud_, "Handles");
-	else if (plotting_mode_ == RVIZ_PLOTTING)
-		plot_.plotHandlesRviz(handles, visuals_frame_);
+	//else if (plotting_mode_ == RVIZ_PLOTTING)
+	//	plot_.plotHandlesRviz(handles, visuals_frame_);
 	return handles;
 }

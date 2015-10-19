@@ -252,11 +252,11 @@ public:
 	 * \param marker_lifetime the lifetime of each visual marker
 	 * \param frame the frame to which the grasps belong
 	*/ 
-	void createVisualsPub(ros::NodeHandle& node, double marker_lifetime, const std::string& frame)
-	{
-		plot_.createVisualPublishers(node, marker_lifetime);
-		visuals_frame_ = frame;
-	}
+//	void createVisualsPub(ros::NodeHandle& node, double marker_lifetime, const std::string& frame)
+//	{
+//		plot_.createVisualPublishers(node, marker_lifetime);
+//		visuals_frame_ = frame;
+//	}
 	
 
 private:
@@ -344,7 +344,7 @@ private:
 	/** constants for plotting modes */
 	static const int NO_PLOTTING = 0; ///< no plotting
 	static const int PCL_PLOTTING = 1; ///< plotting in PCL
-	static const int RVIZ_PLOTTING = 2; ///< plotting in Rviz
+	//static const int RVIZ_PLOTTING = 2; ///< plotting in Rviz
 };
 
 #endif
