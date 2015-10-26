@@ -38,10 +38,13 @@
 //#include <ros/ros.h>
 //#include <visualization_msgs/MarkerArray.h>
 
-#include <agile_grasp/grasp_hypothesis.h>
-#include <agile_grasp/handle.h>
-#include <agile_grasp/quadric.h>
+//#include <agile_grasp/grasp_hypothesis.h>
+//#include <agile_grasp/handle.h>
+//#include <agile_grasp/quadric.h>
 
+#include "grasp_hypothesis.h"
+#include "handle.h"
+#include "quadric.h"
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 typedef pcl::PointCloud<pcl::PointNormal> PointCloudNormal;

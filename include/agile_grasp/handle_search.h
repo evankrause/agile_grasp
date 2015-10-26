@@ -40,9 +40,11 @@
 
 //#include <ros/ros.h>
 
-#include <agile_grasp/grasp_hypothesis.h>
-#include <agile_grasp/handle.h>
+//#include <agile_grasp/grasp_hypothesis.h>
+//#include <agile_grasp/handle.h>
 
+#include "grasp_hypothesis.h"
+#include "handle.h"
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 

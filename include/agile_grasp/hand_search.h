@@ -39,12 +39,17 @@
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/point_cloud.h>
 
-#include <agile_grasp/finger_hand.h>
-#include <agile_grasp/grasp_hypothesis.h>
-#include <agile_grasp/plot.h>
-#include <agile_grasp/quadric.h>
-#include <agile_grasp/rotating_hand.h>
+//#include <agile_grasp/finger_hand.h>
+//#include <agile_grasp/grasp_hypothesis.h>
+//#include <agile_grasp/plot.h>
+//#include <agile_grasp/quadric.h>
+//#include <agile_grasp/rotating_hand.h>
 
+#include "finger_hand.h"
+#include "grasp_hypothesis.h"
+#include "plot.h"
+#include "quadric.h"
+#include "rotating_hand.h"
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 
