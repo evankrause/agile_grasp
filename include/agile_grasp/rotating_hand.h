@@ -38,15 +38,9 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <vector>
 
-//#include <agile_grasp/antipodal.h>
-//#include <agile_grasp/finger_hand.h>
-//#include <agile_grasp/grasp_hypothesis.h>
-
-
-#include "antipodal.h"
-#include "finger_hand.h"
-#include "grasp_hypothesis.h"
-
+#include <agile_grasp/antipodal.h>
+#include <agile_grasp/finger_hand.h>
+#include <agile_grasp/grasp_hypothesis.h>
 
 /** RotatingHand class
  *

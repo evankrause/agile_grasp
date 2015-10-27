@@ -47,20 +47,12 @@
 #include <pcl/segmentation/sac_segmentation.h>
 
 // project dependencies
-//#include <agile_grasp/grasp_hypothesis.h>
-//#include <agile_grasp/hand_search.h>
-//#include <agile_grasp/handle.h>
-//#include <agile_grasp/handle_search.h>
-//#include <agile_grasp/learning.h>
-//#include <agile_grasp/plot.h>
-
-#include "grasp_hypothesis.h"
-#include "hand_search.h"
-#include "handle.h"
-#include "handle_search.h"
-#include "learning.h"
-#include "plot.h"
-
+#include <agile_grasp/grasp_hypothesis.h>
+#include <agile_grasp/hand_search.h>
+#include <agile_grasp/handle.h>
+#include <agile_grasp/handle_search.h>
+#include <agile_grasp/learning.h>
+#include <agile_grasp/plot.h>
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 

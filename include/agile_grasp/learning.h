@@ -42,9 +42,7 @@
 #include <sys/stat.h>
 #include <vector>
 
-//#include <agile_grasp/rotating_hand.h>
-
-#include "rotating_hand.h"
+#include <agile_grasp/rotating_hand.h>
 
 /** Learning class
  *

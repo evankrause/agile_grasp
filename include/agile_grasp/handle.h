@@ -36,8 +36,7 @@
 #include <iostream>
 #include <vector>
 
-//#include <agile_grasp/grasp_hypothesis.h>
-#include "grasp_hypothesis.h"
+#include <agile_grasp/grasp_hypothesis.h>
 
 /** HandleSearch class
  *

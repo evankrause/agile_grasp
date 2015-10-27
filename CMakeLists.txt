@@ -128,7 +128,7 @@ SET(SOURCES
   src/${PROJECT_NAME}/plot.cpp
   src/${PROJECT_NAME}/hand_search.cpp
   )
-ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCES})
+ADD_LIBRARY(${PROJECT_NAME} ${SOURCES})
 
 #add_library(quadric src/${PROJECT_NAME}/quadric.cpp)
 #add_library(finger_hand src/${PROJECT_NAME}/finger_hand.cpp)
