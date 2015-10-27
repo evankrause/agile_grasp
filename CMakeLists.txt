@@ -164,7 +164,7 @@ ADD_EXECUTABLE(TestCPP src/nodes/test.cpp)
 
 ## Specify libraries to link a library or executable target against
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} lapack)
 TARGET_LINK_LIBRARIES(TestCPP ${PROJECT_NAME} ${PCL_LIBRARIES} lapack)
 #target_link_libraries(quadric ${PCL_LIBRARIES} lapack)
 #target_link_libraries(rotating_hand antipodal finger_hand grasp_hypothesis ${PCL_LIBRARIES})
