@@ -145,7 +145,7 @@ ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCES})
 
 
 ## Declare a cpp executable
-ADD_EXECUTABLE(TestCPP src/nodes/test.cpp)
+#ADD_EXECUTABLE(TestCPP src/nodes/test.cpp)
 
 #add_executable(test_taubin_fitting src/tests/test_taubin.cpp)
 #add_executable(hands_test src/tests/hands_test.cpp)
@@ -165,7 +165,8 @@ ADD_EXECUTABLE(TestCPP src/nodes/test.cpp)
 ## Specify libraries to link a library or executable target against
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} lapack)
-TARGET_LINK_LIBRARIES(TestCPP ${PROJECT_NAME} ${PCL_LIBRARIES} lapack)
+#TARGET_LINK_LIBRARIES(TestCPP ${PROJECT_NAME} ${PCL_LIBRARIES} lapack)
+
 #target_link_libraries(quadric ${PCL_LIBRARIES} lapack)
 #target_link_libraries(rotating_hand antipodal finger_hand grasp_hypothesis ${PCL_LIBRARIES})
 #target_link_libraries(localization grasp_hypothesis hand_search handle handle_search learning plot ${PCL_LIBRARIES})
@@ -201,3 +202,8 @@ TARGET_LINK_LIBRARIES(TestCPP ${PROJECT_NAME} ${PCL_LIBRARIES} lapack)
 #install(DIRECTORY launch/
 #	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
 
+install (DIRECTORY include/${PROJECT_NAME}/ DESTINATION /usr/local/include/${PROJECT_NAME}/ FILES_MATCHING PATTERN "*.h" PATTERN ".git" EXCLUDE)
+install (DIRECTORY build/ DESTINATION /usr/local/lib/ FILES_MATCHING PATTERN "*.so" PATTERN ".git" EXCLUDE)
+#install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}  DESTINATION /usr/lib/${PROJECT_NAME} FILES_MATCHING PATTERN "*.cmake" PATTERN ".git" EXCLUDE)
+
+#install (TARGETS agile_grasp DESTINATION /usr/local/bin PATTERN ".git" EXCLUDE)
