@@ -227,10 +227,10 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 		{
 			GraspHypothesis grasp = hands_list[i];
 			grasp.setFullAntipodal(true);
-      is_antipodal[i] = true;
+			is_antipodal[i] = true;
 		}
-    else
-      is_antipodal[i] = false;
+		else
+		  is_antipodal[i] = false;
 	}
 
   for (int i = 0; i < is_antipodal.size(); i++)
@@ -242,8 +242,8 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
     }
   }
 
-  std::cout << " " << antipodal_hands.size() << " antipodal grasps found.\n";
-	return antipodal_hands;
+  cout << " " << antipodal_hands.size() << " antipodal grasps found.\n" << endl;
+  return antipodal_hands;
 }
 
 void Learning::convertData(const std::vector<Instance>& instances, 
@@ -328,11 +328,11 @@ cv::Mat Learning::convertToImage(const Instance& ins)
 
   // reverse x-direction to keep orientation consistent
 	if (ins.binormal.dot(ins.source_to_center) > 0)
-		horizontal_cells = floorVector((ins.pts.row(0).array() - HORIZONTAL_LIMITS[0]) / cell_size);
+		horizontal_cells = floorVector(((ins.pts.row(0).array() - HORIZONTAL_LIMITS[0]) / cell_size).matrix());
 	else
-		horizontal_cells = floorVector((-ins.pts.row(0).array() - HORIZONTAL_LIMITS[0]) / cell_size);
+		horizontal_cells = floorVector(((-ins.pts.row(0).array() - HORIZONTAL_LIMITS[0]) / cell_size).matrix());
 
-	vertical_cells = floorVector((ins.pts.row(1).array() - VERTICAL_LIMITS[0]) / cell_size);
+	vertical_cells = floorVector(((ins.pts.row(1).array() - VERTICAL_LIMITS[0]) / cell_size).matrix());
 
 	std::set<Eigen::Vector2i, UniqueVectorComparator> cells;
 	for (int i = 0; i < ins.pts.cols(); i++)
