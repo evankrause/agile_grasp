@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(agile_grasp)
 
 ## System dependencies are found with CMake's conventions
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(LAPACK REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(PCL REQUIRED)
