@@ -52,8 +52,8 @@ void GraspLocalizer::cloud_callback(const sensor_msgs::PointCloud2ConstPtr& msg)
   if (cloud_frame_.compare(msg->header.frame_id) != 0 
 			&& cloud_frame_.compare("/" + msg->header.frame_id) != 0)
   {
-    std::cout << "Input cloud frame " << msg->header.frame_id << " is not equal to parameter " << cloud_frame_ 
-			<< std::endl;
+    //std::cout << "Input cloud frame " << msg->header.frame_id << " is not equal to parameter " << cloud_frame_
+		//	<< std::endl;
     std::exit(EXIT_FAILURE);
   }
   
@@ -61,7 +61,7 @@ void GraspLocalizer::cloud_callback(const sensor_msgs::PointCloud2ConstPtr& msg)
     pcl::fromROSMsg(*msg, *cloud_left_);
   else if (num_clouds_received_ == 1)
     pcl::fromROSMsg(*msg, *cloud_right_);
-  std::cout << "Received cloud # " << num_clouds_received_ << " with " << msg->height * msg->width << " points\n";
+  //std::cout << "Received cloud # " << num_clouds_received_ << " with " << msg->height * msg->width << " points\n";
   num_clouds_received_++;
 }
 
@@ -71,14 +71,14 @@ void GraspLocalizer::cloud_sized_callback(const agile_grasp::CloudSized& msg)
   // get point cloud from topic
   if (cloud_frame_.compare(msg.cloud.header.frame_id) != 0)
   {
-    std::cout << "Input cloud frame " << msg.cloud.header.frame_id << " is not equal to parameter "
-      << cloud_frame_ << std::endl;
+    //std::cout << "Input cloud frame " << msg.cloud.header.frame_id << " is not equal to parameter "
+    //  << cloud_frame_ << std::endl;
     std::exit(EXIT_FAILURE);
   }
   
   pcl::fromROSMsg(msg.cloud, *cloud_left_);
   size_left_ = msg.size_left.data;
-  std::cout << "Received cloud with size_left: " << size_left_ << std::endl;
+  //std::cout << "Received cloud with size_left: " << size_left_ << std::endl;
   num_clouds_received_ = 1;
 }
 
@@ -166,7 +166,7 @@ agile_grasp::Grasps GraspLocalizer::createGraspsMsgFromHands(const std::vector<H
     }
   }
   msg.header.stamp = ros::Time::now();
-  std::cout << "Created grasps msg containing " << msg.grasps.size() << " hands\n";
+  //std::cout << "Created grasps msg containing " << msg.grasps.size() << " hands\n";
   return msg;
 }
 
@@ -177,7 +177,7 @@ agile_grasp::Grasps GraspLocalizer::createGraspsMsg(const std::vector<Handle>& h
   for (int i = 0; i < handles.size(); i++)
     msg.grasps.push_back(createGraspMsg(handles[i]));  
   msg.header.stamp = ros::Time::now();
-  std::cout << "Created grasps msg containing " << msg.grasps.size() << " handles\n";
+  //std::cout << "Created grasps msg containing " << msg.grasps.size() << " handles\n";
   return msg;
 }
 

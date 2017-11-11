@@ -8,14 +8,14 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 	
 	if (size_left == 0 || cloud_in->size() == 0)
 	{
-		std::cout << "Input cloud is empty!\n";
-		std::cout << size_left << std::endl;
+		//std::cout << "Input cloud is empty!\n";
+		//std::cout << size_left << std::endl;
 		hand_list.resize(0);
 		return hand_list;
 	}
 	
 	// set camera source for all points (0 = left, 1 = right)
-	std::cout << "Generating camera sources for " << cloud_in->size() << " points ...\n";
+	//std::cout << "Generating camera sources for " << cloud_in->size() << " points ...\n";
 	Eigen::VectorXi pts_cam_source(cloud_in->size());
 	if (size_left == cloud_in->size())
 		pts_cam_source << Eigen::VectorXi::Zero(size_left);
@@ -27,10 +27,10 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 	pcl::removeNaNFromPointCloud(*cloud_in, *cloud_in, nan_indices);
 
 	// reduce point cloud to workspace
-	std::cout << "Filtering workspace ...\n";
+	//std::cout << "Filtering workspace ...\n";
 	PointCloud::Ptr cloud(new PointCloud);
 	filterWorkspace(cloud_in, pts_cam_source, cloud, pts_cam_source);
-	std::cout << " " << cloud->size() << " points left\n";
+	//std::cout << " " << cloud->size() << " points left\n";
 
 	// store complete cloud for later plotting
 	PointCloud::Ptr cloud_plot(new PointCloud);
@@ -38,11 +38,11 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 	*cloud_ = *cloud;
 
 	// voxelize point cloud
-	std::cout << "Voxelizing point cloud\n";
+	//std::cout << "Voxelizing point cloud\n";
 	double t1_voxels = omp_get_wtime();
 	voxelizeCloud(cloud, pts_cam_source, cloud, pts_cam_source, 0.003);
 	double t2_voxels = omp_get_wtime() - t1_voxels;
-	std::cout << " Created " << cloud->points.size() << " voxels in " << t2_voxels << " sec\n";
+	//std::cout << " Created " << cloud->points.size() << " voxels in " << t2_voxels << " sec\n";
 
 	// plot camera source for each point in the cloud
 	if (plots_camera_sources_)
@@ -50,7 +50,7 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 
 	if (uses_clustering)
 	{
-    std::cout << "Finding point cloud clusters ... \n";
+    //std::cout << "Finding point cloud clusters ... \n";
         
 		// Create the segmentation object for the planar model and set all the parameters
 		pcl::SACSegmentation<pcl::PointXYZ> seg;
@@ -68,13 +68,13 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 		seg.segment(*inliers, *coefficients);
 		if (inliers->indices.size() == 0)
 		{
-			std::cout << " Could not estimate a planar model for the given dataset." << std::endl;
+			//std::cout << " Could not estimate a planar model for the given dataset." << std::endl;
 			hand_list.resize(0);
 			return hand_list;
 		}
     
-    std::cout << " PointCloud representing the planar component: " << inliers->indices.size()
-      << " data points." << std::endl;
+    //std::cout << " PointCloud representing the planar component: " << inliers->indices.size()
+    //  << " data points." << std::endl;
 
 		// Extract the nonplanar inliers
 		pcl::ExtractIndices<pcl::PointXYZ> extract;
@@ -93,8 +93,8 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 		}
 		cloud = cloud_cluster;
 		*cloud_plot = *cloud;
-		std::cout << " PointCloud representing the non-planar component: " << cloud->points.size()
-      << " data points." << std::endl;
+		//std::cout << " PointCloud representing the non-planar component: " << cloud->points.size()
+     // << " data points." << std::endl;
 	}
 
 	// draw down-sampled and workspace reduced cloud
@@ -115,13 +115,13 @@ std::vector<GraspHypothesis> Localization::localizeHands(const PointCloud::Ptr& 
 	// remove hands at boundaries of workspace
 	if (filters_boundaries_)
   {
-    std::cout << "Filtering out hands close to workspace boundaries ...\n";
+    //std::cout << "Filtering out hands close to workspace boundaries ...\n";
     hand_list = filterHands(hand_list);
-    std::cout << " # hands left: " << hand_list.size() << "\n";
+    //std::cout << " # hands left: " << hand_list.size() << "\n";
   }
 
 	double t2 = omp_get_wtime();
-	std::cout << "Hand localization done in " << t2 - t0 << " sec\n";
+	//std::cout << "Hand localization done in " << t2 - t0 << " sec\n";
 
 	if (plotting_mode_ == PCL_PLOTTING)
 	//{
@@ -146,8 +146,8 @@ std::vector<GraspHypothesis> Localization::predictAntipodalHands(const std::vect
 	cams_mat.col(0) = cam_tf_left_.block<3, 1>(0, 3);
 	cams_mat.col(1) = cam_tf_right_.block<3, 1>(0, 3);
 	antipodal_hands = learn.classify(hand_list, svm_filename, cams_mat);
-	std::cout << " runtime: " << omp_get_wtime() - t0 << " sec\n";
-	std::cout << antipodal_hands.size() << " antipodal hand configurations found\n"; 
+	//std::cout << " runtime: " << omp_get_wtime() - t0 << " sec\n";
+	//std::cout << antipodal_hands.size() << " antipodal hand configurations found\n";
   if (plotting_mode_ == PCL_PLOTTING)
 		plot_.plotHands(hand_list, antipodal_hands, cloud_, "Antipodal Hands");
 	//else if (plotting_mode_ == RVIZ_PLOTTING)
@@ -176,10 +176,10 @@ std::vector<GraspHypothesis> Localization::localizeHands(const std::string& pcd_
 		std::vector<GraspHypothesis> hand_list(0);
 		return hand_list;
 	}
-	if (pcd_filename_right.length() > 0)
-		std::cout << "Loaded left point cloud with " << cloud_left->width * cloud_left->height << " data points.\n";
-	else
-		std::cout << "Loaded point cloud with " << cloud_left->width * cloud_left->height << " data points.\n";
+	//if (pcd_filename_right.length() > 0)
+	//	std::cout << "Loaded left point cloud with " << cloud_left->width * cloud_left->height << " data points.\n";
+	//else
+	//	std::cout << "Loaded point cloud with " << cloud_left->width * cloud_left->height << " data points.\n";
 
 	PointCloud::Ptr cloud_right(new PointCloud);
 	if (pcd_filename_right.length() > 0)
@@ -190,12 +190,12 @@ std::vector<GraspHypothesis> Localization::localizeHands(const std::string& pcd_
 			std::vector<GraspHypothesis> hand_list(0);
 			return hand_list;
 		}
-		std::cout << "Loaded right point cloud with " << cloud_right->width * cloud_right->height << " data points.\n";
-		std::cout << "Loaded both clouds in " << omp_get_wtime() - t0 << " sec\n";
+		//std::cout << "Loaded right point cloud with " << cloud_right->width * cloud_right->height << " data points.\n";
+		//std::cout << "Loaded both clouds in " << omp_get_wtime() - t0 << " sec\n";
 	}
 	
 	// concatenate point clouds
-	std::cout << "Concatenating point clouds ...\n";
+	//std::cout << "Concatenating point clouds ...\n";
 	PointCloud::Ptr cloud(new PointCloud);
 	*cloud = *cloud_left + *cloud_right;
 

@@ -72,7 +72,7 @@ std::vector<Handle> HandleSearch::findHandles(const std::vector<GraspHypothesis>
     if (max_dist - min_dist > min_length)
     {
       handle_list.push_back(Handle(hand_list, in));
-      std::cout << "handle found with " << in.size() << " inliers\n";
+      //std::cout << "handle found with " << in.size() << " inliers\n";
       
       // eliminate hands in this handle from future search
 			for (int k = 0; k < in.size(); k++)
@@ -82,9 +82,9 @@ std::vector<Handle> HandleSearch::findHandles(const std::vector<GraspHypothesis>
     }
   }
   
-  std::cout << "Handle Search\n";
-  std::cout << " runtime: " << omp_get_wtime() - t0 << " sec\n";
-	std::cout << " " << handle_list.size() << " handles found\n"; 
+  //std::cout << "Handle Search\n";
+  //std::cout << " runtime: " << omp_get_wtime() - t0 << " sec\n";
+	//std::cout << " " << handle_list.size() << " handles found\n";
   return handle_list; 
 }
 

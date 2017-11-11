@@ -28,16 +28,16 @@ void Learning::trainBalanced(const std::vector<GraspHypothesis>& hands_list, con
 				while (indices.size() < max_positive)
 					indices.insert(indices.end(), std::rand() % positives_sub.size());
         
-        std::cout << positives.size() << " positive examples found\n";
-        std::cout << " randomly selected indices:";
+        //std::cout << positives.size() << " positive examples found\n";
+        //std::cout << " randomly selected indices:";
 
 				for (std::set<int>::iterator it = indices.begin(); it != indices.end(); it++)
 				{
-          std::cout << " " << *it;
+          //std::cout << " " << *it;
 					positives.push_back(positives_sub[*it]);
 				}
         
-        std::cout << std::endl;
+        //std::cout << std::endl;
 			}
       
       positives_sub.resize(0);
@@ -55,8 +55,8 @@ void Learning::trainBalanced(const std::vector<GraspHypothesis>& hands_list, con
     indices_selected.push_back(negatives[*it]);
   }
   
-  std::cout << "size(positives): " << positives.size() << std::endl;
-  std::cout << "indices_selected.size: " << indices_selected.size() << std::endl;
+  //std::cout << "size(positives): " << positives.size() << std::endl;
+  //std::cout << "indices_selected.size: " << indices_selected.size() << std::endl;
 
   std::vector<Instance> instances;
 	for (int i = 0; i < indices_selected.size(); i++)
@@ -69,7 +69,7 @@ void Learning::trainBalanced(const std::vector<GraspHypothesis>& hands_list, con
     instances.push_back(createInstance(hands_list[idx], cam_pos, 1));
   }
 
-	std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
+	//std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
 	convertData(instances, file_name, is_plotting);
 }
 
@@ -115,12 +115,12 @@ void Learning::train(const std::vector<GraspHypothesis>& hands_list, const std::
 				while (indices.size() < max_positive)
 					indices.insert(indices.end(), std::rand() % positives.size());
         
-        std::cout << positives.size() << " positive examples found\n";
-        std::cout << " randomly selected indices:";
+        //std::cout << positives.size() << " positive examples found\n";
+        //std::cout << " randomly selected indices:";
 
 				for (std::set<int>::iterator it = indices.begin(); it != indices.end(); it++)
 				{
-					std::cout << " " << *it;
+					//std::cout << " " << *it;
 					instances.push_back(createInstance(hands_list[positives[*it]], cam_pos));
       
           // add instances for simulated left and right camera
@@ -128,7 +128,7 @@ void Learning::train(const std::vector<GraspHypothesis>& hands_list, const std::
           instances.push_back(createInstance(hands_list[positives[*it]], cam_pos, 1));
 				}
         
-        std::cout << std::endl;
+        //std::cout << std::endl;
 			}
 			
       positives.resize(0);
@@ -136,7 +136,7 @@ void Learning::train(const std::vector<GraspHypothesis>& hands_list, const std::
 		}
 	}
 
-	std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
+	//std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
 	convertData(instances, file_name, is_plotting);
 }
 
@@ -158,14 +158,14 @@ void Learning::train(const std::vector<GraspHypothesis>& hands_list, const std::
 		}
 	}
 
-	std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
+	//std::cout << "Converting " << instances.size() << " training examples (grasps) to images\n";
 	convertData(instances, file_name, is_plotting);
 }
 
 std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesis>& hands_list,
 	const std::string& svm_filename, const Eigen::Matrix3Xd& cam_pos, bool is_plotting)
 {
-	std::cout << "Predicting ...\n";
+	//std::cout << "Predicting ...\n";
   std::vector<GraspHypothesis> antipodal_hands(0);
 	
 	// check if SVM file exists
@@ -173,7 +173,7 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 	if (!f.good()) 
 	{
 		f.close();
-		std::cout << " Error: File " << svm_filename << " does not exist!\n";
+		//std::cout << " Error: File " << svm_filename << " does not exist!\n";
 		return antipodal_hands;
 	}
 		
@@ -186,11 +186,11 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 	}
 	catch (cv::Exception& e)
 	{
-		std::cout << " Exception: " << e.msg << "\n";
+		//std::cout << " Exception: " << e.msg << "\n";
 		return antipodal_hands;
 	}
-	std::cout << " time for loading SVM: " << omp_get_wtime() - t0 << "\n";
-  std::cout << " # of support vectors: " << svm.get_support_vector_count() << "\n";
+  //std::cout << " time for loading SVM: " << omp_get_wtime() - t0 << "\n";
+  //std::cout << " # of support vectors: " << svm.get_support_vector_count() << "\n";
 	cv::HOGDescriptor hog;
 	hog.winSize = cv::Size(64, 64);
 	std::vector<bool> is_antipodal(hands_list.size());
@@ -242,7 +242,7 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
     }
   }
 
-  cout << " " << antipodal_hands.size() << " antipodal grasps found.\n" << endl;
+  //cout << " " << antipodal_hands.size() << " antipodal grasps found.\n" << endl;
   return antipodal_hands;
 }
 
@@ -312,9 +312,9 @@ void Learning::convertData(const std::vector<Instance>& instances,
   CvSVM svm;
 	svm.train(features, labels, cv::Mat(), cv::Mat(), params);
 	svm.save(file_name.c_str());
-	std::cout << "# training examples: " << features.rows << " (# positives: " << num_positives
-			<< ", # negatives: " << features.rows - num_positives << ")\n";
-	std::cout << "Saved trained SVM as " << file_name << "\n";
+	//std::cout << "# training examples: " << features.rows << " (# positives: " << num_positives
+	//		<< ", # negatives: " << features.rows - num_positives << ")\n";
+	//std::cout << "Saved trained SVM as " << file_name << "\n";
 }
 
 cv::Mat Learning::convertToImage(const Instance& ins)

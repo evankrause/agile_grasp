@@ -16,7 +16,7 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
 	// calculate normals for all points
 	if (calculates_antipodal)
 	{
-		std::cout << "Calculating normals for all points\n";
+		//std::cout << "Calculating normals for all points\n";
 		nn_radius_taubin_ = 0.01;
 		std::vector<int> indices_cloud(cloud->size());
 		for (int i = 0; i < indices_cloud.size(); i++)
@@ -31,7 +31,7 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
 	if (indices.size() == 0)
 	{
 		double t_rand = omp_get_wtime();
-		std::cout << "Generating uniform random indices ...\n";
+		//std::cout << "Generating uniform random indices ...\n";
 		indices_rand.resize(num_samples_);
 		pcl::RandomSample<pcl::PointXYZ> random_sample;
 		random_sample.setInputCloud(cloud);
@@ -40,7 +40,7 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
 		hands_cam_source.resize(num_samples_);
 		for (int i = 0; i < num_samples_; i++)
 			hands_cam_source(i) = pts_cam_source(indices_rand[i]);
-		std::cout << " Done in " << omp_get_wtime() - t_rand << " sec\n";
+		//std::cout << " Done in " << omp_get_wtime() - t_rand << " sec\n";
 	}
 	else
 		indices_rand = indices;
@@ -49,13 +49,13 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
 		plot_.plotSamples(indices_rand, cloud);
 
 	// find quadrics
-	std::cout << "Estimating local axes ...\n";
+	//std::cout << "Estimating local axes ...\n";
 	std::vector<Quadric> quadric_list = findQuadrics(cloud, pts_cam_source, kdtree, indices_rand);
 	if (plots_local_axes_)
 		plot_.plotLocalAxes(quadric_list, cloud_plot);
 
 	// find hands
-	std::cout << "Finding hand poses ...\n";
+	//std::cout << "Finding hand poses ...\n";
 	std::vector<GraspHypothesis> hand_list = findHands(cloud, pts_cam_source, quadric_list, hands_cam_source, kdtree);
   
   return hand_list;
@@ -104,7 +104,7 @@ std::vector<Quadric> HandSearch::findQuadrics(const PointCloud::Ptr cloud,
 	}
 
 	double t2 = omp_get_wtime();
-	std::cout << "Fitted " << quadric_list.size() << " quadrics in " << t2 - t1 << " sec.\n";
+	//std::cout << "Fitted " << quadric_list.size() << " quadrics in " << t2 - t1 << " sec.\n";
 
 //  quadric_list[0].print(); // debugging
 //  plot_.plotLocalAxes(quadric_list, cloud);
@@ -186,10 +186,10 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
 	time_nn /= quadric_list.size();
 	time_iter /= quadric_list.size();
 	time_tf /= quadric_list.size();
-	std::cout << " avg time for transforming point neighborhood: " << time_tf << " sec.\n";
-	std::cout << " avg time for NN search: " << time_nn << " sec.\n";
-	std::cout << " avg time for rotating_hand.evaluate(): " << time_eval_hand << " sec.\n";
-	std::cout << " avg time per iteration: " << time_iter << " sec.\n";
+	//std::cout << " avg time for transforming point neighborhood: " << time_tf << " sec.\n";
+	//std::cout << " avg time for NN search: " << time_nn << " sec.\n";
+	//std::cout << " avg time for rotating_hand.evaluate(): " << time_eval_hand << " sec.\n";
+	//std::cout << " avg time per iteration: " << time_iter << " sec.\n";
   
   std::vector<GraspHypothesis> grasp_list;
   for (std::size_t i = 0; i < grasp_lists.size(); i++)
@@ -200,7 +200,7 @@ std::vector<GraspHypothesis> HandSearch::findHands(const PointCloud::Ptr cloud,
   }
 
 	double t2 = omp_get_wtime();
-	std::cout << " Found " << grasp_list.size() << " robot hand poses in " << t2 - t1 << " sec.\n";
+	//std::cout << " Found " << grasp_list.size() << " robot hand poses in " << t2 - t1 << " sec.\n";
 
 	return grasp_list;
 }
