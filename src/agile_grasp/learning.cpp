@@ -178,11 +178,11 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 	}
 		
 	// load the SVM model from the file
-	CvSVM svm;
+  cv::Ptr<cv::ml::SVM> svm = cv::ml::SVM::create();
 	double t0 = omp_get_wtime();
 	try
 	{
-		svm.load(svm_filename.c_str());
+		svm->load(svm_filename.c_str());
 	}
 	catch (cv::Exception& e)
 	{
@@ -222,7 +222,7 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 		cv::Mat features(1, hog.getDescriptorSize() * 2, CV_32FC1);
 		for (int k = 0; k < descriptors.size(); k++)
 			features.at<float>(k) = descriptors[k];
-		float prediction = svm.predict(features);
+		float prediction = svm->predict(features);
 		if (prediction == 1)
 		{
 			GraspHypothesis grasp = hands_list[i];
@@ -295,23 +295,22 @@ void Learning::convertData(const std::vector<Instance>& instances,
 	}
 
   // train the SVM
-	CvSVMParams params;
-  // cv::Mat weights(1, 2, CV_32FC1);
-  // weights.at<float>(0,0) = 0.9;
-  // weights.at<float>(0,1) = 0.1;
-  // CvMat cv1_weights = weights;  
-  // params.class_weights = &cv1_weights;
-	params.svm_type = CvSVM::C_SVC;
+  cv::Ptr<cv::ml::SVM> svm = cv::ml::SVM::create();
+   //cv::Mat weights(1, 2, CV_32FC1);
+   //weights.at<float>(0,0) = 0.9;
+   //weights.at<float>(0,1) = 0.1;
+   //svm->setClassWeights(weights);
+  svm->setType(cv::ml::SVM::C_SVC);
   if (uses_linear_kernel)
-    params.kernel_type = CvSVM::LINEAR;
+    svm->setKernel(cv::ml::SVM::LINEAR);
   else
   {
-    params.kernel_type = CvSVM::POLY;
-    params.degree = 2;
+    svm->setKernel(cv::ml::SVM::POLY);
+    svm->setDegree(2);
 	}
-  CvSVM svm;
-	svm.train(features, labels, cv::Mat(), cv::Mat(), params);
-	svm.save(file_name.c_str());
+  cv::Ptr<cv::ml::TrainData> tData = cv::ml::TrainData::create(features, cv::ml::SampleTypes::ROW_SAMPLE, labels);
+  svm->train(tData);
+	svm->save(file_name.c_str());
 	//std::cout << "# training examples: " << features.rows << " (# positives: " << num_positives
 	//		<< ", # negatives: " << features.rows - num_positives << ")\n";
 	//std::cout << "Saved trained SVM as " << file_name << "\n";
