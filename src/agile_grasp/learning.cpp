@@ -178,17 +178,14 @@ std::vector<GraspHypothesis> Learning::classify(const std::vector<GraspHypothesi
 	}
 		
 	// load the SVM model from the file
-  cv::Ptr<cv::ml::SVM> svm = cv::ml::SVM::create();
+  cv::Ptr<cv::ml::SVM> svm;
 	double t0 = omp_get_wtime();
-	try
-	{
-		svm->load(svm_filename.c_str());
-	}
-	catch (cv::Exception& e)
-	{
-		//std::cout << " Exception: " << e.msg << "\n";
-		return antipodal_hands;
-	}
+  try {
+    svm = cv::ml::SVM::load(svm_filename.c_str());
+  } catch (cv::Exception& e) {
+    std::cerr << " Exception: " << e.msg << std::endl;
+    return antipodal_hands;
+  }
   //std::cout << " time for loading SVM: " << omp_get_wtime() - t0 << "\n";
   //std::cout << " # of support vectors: " << svm.get_support_vector_count() << "\n";
 	cv::HOGDescriptor hog;

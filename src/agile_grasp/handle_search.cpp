@@ -100,7 +100,7 @@ bool HandleSearch::shortenHandle(std::vector<Eigen::Vector2d> &inliers, double g
 		if (diff > gap_threshold)
 		{
 			std::vector<Eigen::Vector2d> out;
-			if (inliers[i](2) < 0)
+			if (inliers[i](1) < 0)
 			{
 				out.assign(inliers.begin() + i + 1, inliers.end());
 				is_done = false;

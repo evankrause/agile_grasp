@@ -12,7 +12,7 @@ RotatingHand::RotatingHand(const Eigen::VectorXd& camera_origin_left,
 	// generate hand orientations
 	int num_orientations = 8;
 	Eigen::VectorXd angles = Eigen::VectorXd::LinSpaced(num_orientations + 1, -1.0 * M_PI, M_PI);
-	angles_ = angles.block(0, 0, 1, num_orientations);
+	angles_ = angles.head(num_orientations);
 }
 
 

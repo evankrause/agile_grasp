@@ -304,18 +304,19 @@ void Localization::voxelizeCloud(const PointCloud::Ptr& cloud_in, const Eigen::V
 		i++;
 	}
 
+	// TODO: EAK: there's probably a better way to do this instead of calling transpose()
 	voxels_left.row(0) = voxels_left.row(0) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_left.cols()) * min_left(0);
+			+ Eigen::VectorXd::Ones(voxels_left.cols()).transpose() * min_left(0);
 	voxels_left.row(1) = voxels_left.row(1) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_left.cols()) * min_left(1);
+			+ Eigen::VectorXd::Ones(voxels_left.cols()).transpose() * min_left(1);
 	voxels_left.row(2) = voxels_left.row(2) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_left.cols()) * min_left(2);
+			+ Eigen::VectorXd::Ones(voxels_left.cols()).transpose() * min_left(2);
 	voxels_right.row(0) = voxels_right.row(0) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_right.cols()) * min_right(0);
+			+ Eigen::VectorXd::Ones(voxels_right.cols()).transpose() * min_right(0);
 	voxels_right.row(1) = voxels_right.row(1) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_right.cols()) * min_right(1);
+			+ Eigen::VectorXd::Ones(voxels_right.cols()).transpose() * min_right(1);
 	voxels_right.row(2) = voxels_right.row(2) * cell_size
-			+ Eigen::VectorXd::Ones(voxels_right.cols()) * min_right(2);
+			+ Eigen::VectorXd::Ones(voxels_right.cols()).transpose() * min_right(2);
 
 	PointCloud::Ptr cloud(new PointCloud);
 	cloud->resize(bins_left.size() + bins_right.size());

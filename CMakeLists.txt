@@ -9,7 +9,8 @@ find_package(PCL REQUIRED)
 #~ find_package(VTK 6.0 REQUIRED NO_MODULE) # required in Fedora Core
 
 ## Set compiler optimization flags
-set(CMAKE_CXX_FLAGS "-DNDEBUG -fopenmp -Wno-deprecated -Wenum-compare")
+set(CMAKE_CXX_FLAGS "-fopenmp -Wno-deprecated -Wenum-compare")
+set(CMAKE_BUILD_TYPE Release)
 
 ###########
 ## Build ##
